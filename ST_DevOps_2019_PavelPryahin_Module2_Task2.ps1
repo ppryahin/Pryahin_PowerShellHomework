@@ -14,11 +14,35 @@ New-PSDrive -Name M2T2_Pryahin -PSProvider FileSystem -Root 'C:\Temp\M2T2_Pryahi
 Get-Service | Where-Object {$_.Status -eq "Running"} | Out-File 'C:\Temp\M2T2_Pryahin\Services.txt'
 Get-Content C:\Temp\M2T2_Pryahin\Services.txt
 
+
+#########TASK 5############
+[int]$tmp = 0
+foreach ($i in (Get-Variable | Select-Object Value))
+{
+    if ($i.Value -is [int])
+    {
+        Write-host("Value: " + $i.Value)
+        $tmp += $i.Value
+    }
+}
+Write-Host("Sum = $tmp")
+
 #########TASK 6############
 Get-Process | Sort-Object CPU -descending | Select-Object -first 5 -Property ID,ProcessName, TotalProcessorTime | Out-File 'C:\Temp\M2T2_Pryahin\CPU_usage.txt'
 
 #########TASK 7###########
-Get-Process | Select-Object Name,@{Name='virtualmemoryusage(MB)';Expression={($_.vm / 1024kb)}}##не додумался, как доделать)
+$Array = @(Get-Process| Select-Object VirtualMemorySize, Name)
+foreach($i in $Array){
+    if (($i.VirtualMemorySize / 1000000) -gt 100 )
+    {
+        Write-Host("Process: " + $i.Name + "---" + ( $i.VirtualMemorySize / 1000000) + " Mb") -ForegroundColor Red
+    }
+    else 
+    {
+        Write-Host("Process: " + $i.Name + "---" + ( $i.VirtualMemorySize / 1000000) + " Mb") -ForegroundColor Green    
+    }
+    
+}
 
 #########TASK 8###########
 $a = Get-ChildItem 'C:\Pryahin_PowerShellHomework\' -Exclude *.tmp -Recurse -Force | Measure-Object -Property Length -Sum ##взял собственную папку, т.к. на виндовс не пускает
@@ -33,7 +57,7 @@ reg query "HKLM\SOFTWARE\MICROSOFT" | Export-Csv C:\Temp\M2T2_Pryahin\reestr.csv
 Get-History |  Export-Clixml C:\Temp\M2T2_Pryahin\History.xml
 
 ########TASK 11###########
-Import-Clixml C:\Temp\M2T2_Pryahin\history.xml -OutVariable ExecutionStatus
+Import-Clixml C:\Temp\M2T2_Pryahin\history.xml | Select-Object Length, ReadCount, PSChildName, PSDrive, PSPath
 
 
 #########TASK 12##########
