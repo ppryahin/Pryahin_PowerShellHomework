@@ -29,7 +29,7 @@ Get-ChildItem -LiteralPath HKLM:\SOFTWARE\Microsoft | Export-Clixml -Path $RootN
 ### 1.5.3. Загрузить данные из полученного в п.1.5.1 или п.1.5.2 файла и вывести в виде списка разным разными цветами
 
 $DataSecurityUpdates = Get-Content -Path $RootNameFolderNameFileCSV               # Читаем .csv файл
-$DataRegistry = Get-Content -Path $RootNameFolderNameFileXML                      # Читаем .xml файл(которого нет)
+$DataRegistry = Get-Content -Path $RootNameFolderNameFileXML                      # Читаем .xml файл(которого нет))))
 
 function Color ($Data, [System.ConsoleColor]$Color)                            # Функция вывода
 {

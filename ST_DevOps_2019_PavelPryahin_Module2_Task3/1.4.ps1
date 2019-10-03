@@ -1,9 +1,11 @@
+1.4.	Подсчитать размер занимаемый файлами в папке (например C:\windows) за исключением файлов с заданным расширением(например .tmp)
+
 [CmdletBinding()]
 Param 
 (
     [parameter (Mandatory = $true, HelpMessage = "Укажите папку для которой нужно посчитать занимаемый ею размер: ")]
     [string]$DirectoryPath ,                          
-    [string]$ExcludeType = "Temp", 
+    [string]$ExcludeType = "tmp", 
     [int]$Total = 0
 )
 
