@@ -12,7 +12,7 @@ Invoke-Command -ScriptBlock { Get-Service | Where-Object {$_.Status -eq "Running
 
 ### 3. Настроить PowerShell Remoting, для управления всеми виртуальными машинами с хостовой.
 
-Enter-PSSession -ComputerName "Pyahin_VM1"
+Enter-PSSession -ComputerName "Pryahin_VM1"
 
 ### 4. Для одной из виртуальных машин установить для прослушивания порт 42658. Проверить работоспособность PS Remoting.
 
